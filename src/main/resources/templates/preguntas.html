@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8">
-<title>Proyectos</title>
+<title>Preguntas</title>
 <!-- Latest compiled and minified CSS -->
 <!-- CSS only -->
 
@@ -50,16 +50,18 @@
 
 	<div class="container">
 		<br>
-		<h1>Relacion de proyectos</h1>
+		<h1>Preguntas</h1>
 		<br>
 		<h4>
 			Bienvenido <span sec:authentication="principal.username"></span>
 		</h4>
 		<br>
+			 <h4 th:text="${proyecto.titulo}"></h4>
+		<br>
 		<div class="row">
 			<div class="col-lg-3">
-				<a th:href="@{/proyectos/nuevo}" class="btn btn-primary btn-sm mb3">Agregar
-					proyecto</a>
+				<a th:href="@{/proyectos/preguntas/nuevo/{id}(id=${proyecto.id})}" class="btn btn-primary btn-sm mb3">Agregar
+					pregunta</a>
 			</div>
 		</div>
 		<br>
@@ -67,20 +69,18 @@
 			style="width: 100%">
 			<thead class="table-dark">
 				<tr>
-					<th>Titulo</th>
-					<th>Fecha</th>
+					<th>Pregunta</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="proyecto : ${listProyectos}">
+				<tr th:each="pregunta : ${listPreguntas}">
 
-					<td th:text="${proyecto.titulo}"></td>
-					<td th:text="${proyecto.fechaInicio}"></td>
+					<td th:text="${pregunta.pregunta}"></td>
 					<td><a class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
-					 	<a th:href="@{/proyectos/editar/{id}(id=${proyecto.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/preguntas/{id}(id=${proyecto.id})}"  class="btn btn-secondary">preguntas</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/{id}(id=${proyecto.id})}" class="btn btn-danger">Eliminar</a></td>
+					 	<a  class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
+						<a class="btn btn-secondary">Articulos</a>&nbsp&nbsp&nbsp
+						<a  class="btn btn-danger">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>

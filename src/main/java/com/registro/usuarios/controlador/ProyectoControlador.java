@@ -61,6 +61,37 @@ public class ProyectoControlador {
 		return "redirect:/proyectos";
 	}
 	
+	@GetMapping("/proyectos/editar/{id}")
+	public String showFormUpdateProyecto(@PathVariable long id, Model modelo) {
+		modelo.addAttribute("proyecto", proyectoServicio.selectProyectobyID(id));
+		List<Estado> estados = estadoServicio.listEstados();
+		modelo.addAttribute("estados", estados);
+		return "editProyecto";
+	}
+	
+	@PostMapping("/proyectos/{id}")
+	public String updateProyecto(@PathVariable long id, @ModelAttribute("proyecto") Proyecto proyecto,
+			Model modelo) {
+		Proyecto proyectoActual = proyectoServicio.selectProyectobyID(id);
+		proyectoActual.setId(id);
+		proyectoActual.setTitulo(proyecto.getTitulo());
+		proyectoActual.setFechaInicio(proyecto.getFechaInicio());
+		proyectoActual.setFechaFin(proyecto.getFechaFin());
+		proyectoActual.setNotas(proyecto.getNotas());
+		proyectoActual.setObjetivo(proyecto.getObjetivo());
+		proyectoActual.setEstado(proyecto.getEstado());
+		
+
+		proyectoServicio.updateProyecto(proyectoActual);
+		return "redirect:/proyectos";
+	}
+	
+	@GetMapping("/proyectos/{id}")
+	public String deleteProyecto(@PathVariable long id) {
+		proyectoServicio.deleteProyecto(id);
+		return "redirect:/proyectos";
+	}
+	
 	
 
 }
