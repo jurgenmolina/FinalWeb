@@ -39,26 +39,22 @@ public class PreguntaControlador {
 	}
 	
 	
-//	@GetMapping("/proyectos/nuevo")
-//	public String showFormProyecto(Model modelo,  Authentication auth) {
-//		String username = auth.getName();
-//		Usuario usuario = usuarioServicio.selectUsuariobyEmail(username);
-//		Proyecto proyecto = new Proyecto();
-//		proyecto.setUsuario(usuario);
-//		
-//		List<Estado> estados = estadoServicio.listEstados();
-//		
-//		modelo.addAttribute("proyecto", proyecto);
-//		modelo.addAttribute("estados", estados);
-//		return "addProyecto"; //Retorna al archivo crear proyectos
-//	}
-//	
-//	@PostMapping("/proyectos")
-//	public String insertarProyecto(@ModelAttribute("proyecto") Proyecto proyecto) {
-//		proyectoServicio.insertProyecto(proyecto);
-//		return "redirect:/proyectos";
-//	}
-//	
+	@GetMapping("/proyectos/preguntas/nuevo/{id}")
+	public String showFormPregunta(@PathVariable int id, Model modelo) {
+		Pregunta pregunta = new Pregunta();
+		Proyecto proyecto = proyectoServicio.selectProyectobyID(id);
+		pregunta.setProyecto(proyecto);
+		modelo.addAttribute("pregunta", pregunta);
+		return "addPregunta"; //Retorna al archivo crear preguntas
+	}
+	
+	@PostMapping("/proyectos/preguntas/{id}")
+	public String insertarPregunta(@ModelAttribute("pregunta") Pregunta pregunta, @PathVariable long id) {
+		System.out.println(pregunta);
+		preguntaServicio.insertPregunta(pregunta);
+		return "redirect:/proyectos/preguntas/" + id;
+	}
+	
 //	@GetMapping("/proyectos/editar/{id}")
 //	public String showFormUpdateProyecto(@PathVariable long id, Model modelo) {
 //		modelo.addAttribute("proyecto", proyectoServicio.selectProyectobyID(id));

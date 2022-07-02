@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8">
-<title>Inicio</title>
+<title>Agregar Pregunta</title>
 <!-- Latest compiled and minified CSS -->
 <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -11,7 +11,6 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 
 </head>
 <body>
-
 	<nav class="navbar navbar-dark bg-dark">
 	  <div class="container">
 	    <a class="navbar-brand" href="#" th:href="@{/}">Inicio</a>
@@ -36,51 +35,52 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	<br>
 
 	<div class="container">
+		<h1>Agregar una pregunta</h1>
+		
 		<br>
-		<h1>SISTEMA DE GESTIÓN DE ARTÍCULOS EN ESTADOS DEL ARTE</h1>
-		<br>
-		<h4>
-			Bienvenido <span sec:authentication="principal.username"></span>
-		</h4>
+	</div>
 	
-		<br>
-		<div class="row">
-		   <div class="col-lg-3">
-		     <a th:href="@{/proyectos}" class="btn btn-dark">Proyectos</a>
-		      <a th:href="@{/articulos}" class="btn btn-dark">Articulos</a>
-		   </div>
-		</div> <br>
-
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Email</th>
-					<th>Clave</th>
-					<th>Pais</th>
-					<th>Entidad</th>
-					<th>Estado</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="usuario : ${usuarios}">
-					<td th:text="${usuario.id}">ID</td>
-					<td th:text="${usuario.nombre}">ID</td>
-					<td th:text="${usuario.email}">ID</td>
-					<td th:text="${usuario.clave}">ID</td>
-					<td th:text="${usuario.pais}">ID</td>
-					<td th:text="${usuario.entidad}">ID</td>
-					<td th:text="${usuario.estado}">ID</td>
-				</tr>
-			</tbody>
-		</table>
-			</div>
+	<div class="container">
+       <div class="row">
+          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+              <h1 class="text-center">Escribe tu pregunta</h1>
+              <div class="card-body">
+                 <form th:action="@{/proyectos/preguntas/{id}(id=${pregunta.proyecto.id})}" th:object="${pregunta}" method="POST">
+                    <div class="form-group">
+                       <label>Cadena : </label>
+                       <input type="text" name="cadena" th:field="*{cadena}" class="form-control" placeholder=" " required>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Notas : </label>
+                       <textarea name="notas" th:field="*{notas}" class="form-control" placeholder="" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                       <label>Pregunta : </label>
+                       <textarea name="cuestion" th:field="*{cuestion}" class="form-control" placeholder="" required></textarea>
+                    </div>
+					
+					<div class="form-group">
+                       <label>Proyecto : </label>
+                       <input type="text" name="proyecto" th:field="*{proyecto.id}" class="form-control" readonly >
+                    </div>
+                   <br>
+                    <div class="box-footer">
+                       <button class="btn btn-success">Enviar</button>
+                    </div>
+                 </form>
+              </div>
+          </div>
+       </div>
+    </div>
+	
 
 <!-- JavaScript Bundle with Popper -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
  integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
  
+
 </body>
 </html>
 

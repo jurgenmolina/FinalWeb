@@ -22,8 +22,8 @@ public class Pregunta {
 	@JoinColumn(name = "proyecto_id",nullable = false)
 	private Proyecto proyecto;
 	
-	@Column(name = "pregunta",nullable = false, length = 255)
-	private String pregunta;
+	@Column(name = "cuestion",nullable = false, length = 255)
+	private String cuestion;
 	
 	@Column(name = "cadena",nullable = false, length = 255)
 	private String cadena;
@@ -31,19 +31,19 @@ public class Pregunta {
 	@Column(name = "notas",nullable = false, length = 255)
 	private String notas;
 
-	public Pregunta(int id, Proyecto proyecto, String pregunta, String cadena, String notas) {
+	public Pregunta(int id, Proyecto proyecto, String cuestion, String cadena, String notas) {
 		super();
 		this.id = id;
 		this.proyecto = proyecto;
-		this.pregunta = pregunta;
+		this.cuestion = cuestion;
 		this.cadena = cadena;
 		this.notas = notas;
 	}
 
-	public Pregunta(Proyecto proyecto, String pregunta, String cadena, String notas) {
+	public Pregunta(Proyecto proyecto, String cuestion, String cadena, String notas) {
 		super();
 		this.proyecto = proyecto;
-		this.pregunta = pregunta;
+		this.cuestion = cuestion;
 		this.cadena = cadena;
 		this.notas = notas;
 	}
@@ -68,12 +68,12 @@ public class Pregunta {
 		this.proyecto = proyecto;
 	}
 
-	public String getPregunta() {
-		return pregunta;
+	public String getCuestion() {
+		return cuestion;
 	}
 
-	public void setPregunta(String pregunta) {
-		this.pregunta = pregunta;
+	public void setCuestion(String pregunta) {
+		this.cuestion = pregunta;
 	}
 
 	public String getCadena() {
