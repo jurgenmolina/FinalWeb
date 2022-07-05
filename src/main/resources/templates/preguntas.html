@@ -59,7 +59,7 @@
 		<br>
 		<div class="row">
 			<div class="col-lg-3">
-				<a th:href="@{/proyectos/preguntas/nuevo/{id}(id=${proyecto.id})}" class="btn btn-dark">Agregar
+				<a th:href="@{/proyectos/preguntas/nuevo/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-dark">Agregar
 					pregunta</a>
 			</div>
 		</div>
@@ -77,9 +77,9 @@
 
 					<td th:text="${pregunta.cuestion}"></td>
 					<td><a class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
-					 	<a  class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
+					 	<a th:href="@{/proyectos/preguntas/editar/{id}(id=${pregunta.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
 						<a class="btn btn-secondary">Articulos</a>&nbsp&nbsp&nbsp
-						<a  class="btn btn-danger">Eliminar</a></td>
+						<a th:href="@{/proyectos/pregunta/delete{id}(id=${pregunta.id})}" class="btn btn-danger">Eliminar</a></td>
 				</tr>
 			</tbody>
 		</table>

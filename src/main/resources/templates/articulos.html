@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8">
-<title>Proyectos</title>
+<title>Articulos</title>
 <!-- Latest compiled and minified CSS -->
 <!-- CSS only -->
 
@@ -52,17 +52,12 @@
 				<a th:href="@{/}" class="btn btn-dark">Volver</a>
 		</div>
 		<br>
-		<h1>Relacion de proyectos</h1>
+		<h1>Relacion de articulos</h1>
 		
 		<br>
 		<div class="row">
 			<div class="col-lg-3">
-					<a th:href="@{/proyectos/nuevo}" class="btn btn-dark">Agregar
-					proyecto</a>
-					<br>
-					<br>
-					<a th:href="@{/proyectos/exportarExcel}" class="btn btn-dark">Exportar
-					proyecto Excel</a>	
+				<a th:href="@{/articulos/nuevo}" class="btn btn-dark">Agregar articulo</a>
 			</div>
 		</div>
 		<br>
@@ -71,20 +66,19 @@
 			<thead class="table-dark">
 				<tr>
 					<th>Titulo</th>
-					<th>Fecha</th>
+					<th>Autores</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="proyecto : ${listProyectos}">
+				<tr th:each="articulo : ${listArticulos}">
 
-					<td th:text="${proyecto.titulo}"></td>
-					<td th:text="${proyecto.fechaInicio}"></td>
+					<td th:text="${articulo.titulo}"></td>
+					<td th:text="${articulo.autores}"></td>
 					<td><a class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
-					 	<a th:href="@{/proyectos/editar/{id}(id=${proyecto.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/preguntas/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-secondary">preguntas</a>&nbsp&nbsp&nbsp
-						
-						<a th:href="@{/proyectos/{id}(id=${proyecto.id})}" class="btn btn-danger">Eliminar</a></td>
+					 	<a th:href="@{/articulos/editar/{id}(id=${articulo.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp					 
+						<a th:href="@{/articulos/{id}(id=${articulo.id})}" class="btn btn-danger">Eliminar</a>
+					</td>
 				</tr>
 			</tbody>
 		</table>
