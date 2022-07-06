@@ -44,14 +44,17 @@ public class Proyecto {
 	@Column(name = "fechaFin",nullable = false)
 	private Date fechaFin;
 	
+	@Column(name = "fechacreacion")
+	private String fechacreacion;
+	
 	@ManyToOne
 	@JoinColumn(name = "estado_id")
 	private Estado estado;
 
 	
 
-	public Proyecto(Usuario usuario, String titulo, String objetivo, String notas, Date fechaInicio,
-			Date fechaFin, Estado estado) {
+	public Proyecto(Usuario usuario, String titulo, String objetivo, String notas, Date fechaInicio, 
+			Date fechaFin, String fechacreacion, Estado estado) {
 		super();
 		this.usuario = usuario;
 		this.titulo = titulo;
@@ -65,7 +68,7 @@ public class Proyecto {
 
 
 	public Proyecto(Long id, Usuario usuario, String titulo, String objetivo, String notas,
-			Date fechaInicio, Date fechaFin, Estado estado) {
+			Date fechaInicio, Date fechaFin, String fechacreacion, Estado estado) {
 		super();
 		this.id = id;
 		this.usuario = usuario;
@@ -75,6 +78,17 @@ public class Proyecto {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.estado = estado;
+	}
+
+
+	public String getFechacreacion() {
+		return fechacreacion;
+	}
+
+
+
+	public void setFechacreacion(String fechacreacion) {
+		this.fechacreacion = fechacreacion;
 	}
 
 

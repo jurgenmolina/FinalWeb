@@ -58,6 +58,10 @@
 		<div class="row">
 			<div class="col-lg-3">
 				<a th:href="@{/articulos/nuevo}" class="btn btn-dark">Agregar articulo</a>
+				<br>
+				<br>
+				<a th:href="@{/articulos/exportarExcel}" class="btn btn-dark">Exportar
+					articulo Excel</a>
 			</div>
 		</div>
 		<br>
@@ -75,7 +79,7 @@
 
 					<td th:text="${articulo.titulo}"></td>
 					<td th:text="${articulo.autores}"></td>
-					<td><a class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
+					<td><a  th:href="@{/articulos/ver/{id}(id=${articulo.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
 					 	<a th:href="@{/articulos/editar/{id}(id=${articulo.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp					 
 						<a th:href="@{/articulos/{id}(id=${articulo.id})}" class="btn btn-danger">Eliminar</a>
 					</td>

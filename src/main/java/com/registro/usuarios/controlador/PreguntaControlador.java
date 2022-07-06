@@ -29,6 +29,12 @@ public class PreguntaControlador {
 		return "preguntas"; //Retorna al archivo preguntas
 	}
 	
+	@GetMapping("/proyectos/preguntas/ver/{id}")
+	public String viewProyecto(@PathVariable int id, Model modelo) {
+		modelo.addAttribute("pregunta", preguntaServicio.selectPreguntabyID(id));
+		return "viewPregunta";
+	}
+	
 	
 	@GetMapping("/proyectos/preguntas/nuevo/{proyecto_id}")
 	public String showFormPregunta(@PathVariable long proyecto_id, Model modelo) {

@@ -1,9 +1,16 @@
 package com.registro.usuarios.controlador;
 
+import java.io.IOException;
 import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.dom4j.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -13,6 +20,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.registro.usuarios.export.ExportArticulos;
 import com.registro.usuarios.modelo.Articulo;
 import com.registro.usuarios.modelo.Estado;
 import com.registro.usuarios.modelo.Pais;
@@ -47,6 +55,13 @@ public class ArticuloControlador {
 		return "articulos";
 	}
 	
+
+	@GetMapping("/articulos/ver/{id}")
+	public String viewProyecto(@PathVariable long id, Model modelo) {
+		modelo.addAttribute("articulo", articuloServicio.selectArticulobyID(id));
+		return "viewArticulo";
+	}
+	
 	@GetMapping("/articulos/nuevo")
 	public String showFormArticulo(Model modelo,  Authentication auth) {
 		String username = auth.getName();
@@ -65,6 +80,11 @@ public class ArticuloControlador {
 	
 	@PostMapping("/articulos")
 	public String insertarArticulo(@ModelAttribute("articulo") Articulo articulo) {
+		Long datetime = System.currentTimeMillis();
+	    Timestamp timestamp = new Timestamp(datetime);
+	    String fechacreacion = timestamp.toString();
+	    articulo.setFecha_creacion(fechacreacion);
+	    
 		articuloServicio.insertArticulo(articulo);
 		return "redirect:/articulos";
 	}
@@ -80,9 +100,6 @@ public class ArticuloControlador {
 	@PostMapping("/articulos/{id}")
 	public String updateArticulo(@PathVariable long id, @ModelAttribute("articulo") Articulo articulo,
 			Model modelo) {
-		Long datetime = System.currentTimeMillis();
-	    Timestamp timestamp = new Timestamp(datetime);
-	    String fechacreacion = timestamp.toString();
 	    
 		Articulo articuloActual = articuloServicio.selectArticulobyID(id);
 		articuloActual.setId(id);
@@ -96,7 +113,6 @@ public class ArticuloControlador {
 		articuloActual.setVacio(articulo.getVacio());
 		articuloActual.setUrl(articulo.getUrl());
 		articuloActual.setNotas(articulo.getNotas());
-		articuloActual.setFecha_creacion(fechacreacion);
 		articuloActual.setRevista(articulo.getRevista());
 		articuloActual.setCategoria(articulo.getCategoria());
 		articuloActual.setPalabras_clave(articulo.getPalabras_clave());
@@ -109,6 +125,25 @@ public class ArticuloControlador {
 	public String deleteArticulo(@PathVariable long id) {
 		articuloServicio.deleteArticulo(id);
 		return "redirect:/articulos";
+	}
+	
+	@GetMapping("/articulos/exportarExcel")
+	public void exportarListadoDeEmpleadosEnExcel(HttpServletResponse response, Authentication auth) throws DocumentException, IOException {
+		response.setContentType("application/octet-stream");
+		String username = auth.getName();
+		Usuario usuario = usuarioServicio.selectUsuariobyEmail(username);
+		DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+		String fechaActual = dateFormatter.format(new Date());
+		
+		String cabecera = "Content-Disposition";
+		String valor = "attachment; filename=Articulos_" + fechaActual + ".xlsx";
+		
+		response.setHeader(cabecera, valor);
+		
+		List<Articulo> articulos = articuloServicio.listArticulobyIdUsuario(usuario.getId()); 
+		
+		ExportArticulos exporter = new ExportArticulos(articulos);
+		exporter.exportar(response);
 	}
 	
 	

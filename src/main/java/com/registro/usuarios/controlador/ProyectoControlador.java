@@ -1,6 +1,7 @@
 package com.registro.usuarios.controlador;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -49,6 +50,12 @@ public class ProyectoControlador {
 		return "proyectos";
 	}
 	
+	@GetMapping("/proyectos/ver/{id}")
+	public String viewProyecto(@PathVariable long id, Model modelo) {
+		modelo.addAttribute("proyecto", proyectoServicio.selectProyectobyID(id));
+		return "viewProyecto";
+	}
+	
 	@GetMapping("/proyectos/nuevo")
 	public String showFormProyecto(Model modelo,  Authentication auth) {
 		String username = auth.getName();
@@ -65,6 +72,10 @@ public class ProyectoControlador {
 	
 	@PostMapping("/proyectos")
 	public String insertarProyecto(@ModelAttribute("proyecto") Proyecto proyecto) {
+		Long datetime = System.currentTimeMillis();
+	    Timestamp timestamp = new Timestamp(datetime);
+	    String fechacreacion = timestamp.toString();
+	    proyecto.setFechacreacion(fechacreacion);
 		proyectoServicio.insertProyecto(proyecto);
 		return "redirect:/proyectos";
 	}

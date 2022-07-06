@@ -80,7 +80,7 @@
 
 					<td th:text="${proyecto.titulo}"></td>
 					<td th:text="${proyecto.fechaInicio}"></td>
-					<td><a class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
+					<td><a th:href="@{/proyectos/ver/{id}(id=${proyecto.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
 					 	<a th:href="@{/proyectos/editar/{id}(id=${proyecto.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
 						<a th:href="@{/proyectos/preguntas/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-secondary">preguntas</a>&nbsp&nbsp&nbsp
 						

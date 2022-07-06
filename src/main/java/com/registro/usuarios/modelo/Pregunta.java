@@ -91,6 +91,12 @@ public class Pregunta {
 	public void setNotas(String notas) {
 		this.notas = notas;
 	}
+
+	@Override
+	public String toString() {
+		return "Pregunta [id=" + id + ", proyecto=" + proyecto + ", cuestion=" + cuestion + ", cadena=" + cadena
+				+ ", notas=" + notas + "]";
+	}
 	
 	
 	

@@ -3,7 +3,7 @@
 	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="utf-8">
-<title>Preguntas</title>
+<title>Revisiones</title>
 <!-- Latest compiled and minified CSS -->
 <!-- CSS only -->
 
@@ -49,18 +49,19 @@
 
 	<div class="container">
 		<div class="col-lg-3">
-				<a th:href="@{/proyectos}" class="btn btn-dark">Volver</a>
+				<a th:href="@{'/proyectos/preguntas/' + ${pregunta.proyecto.id}}" class="btn btn-dark">Volver</a>
 		</div>
 		<br>
-		<h1>Preguntas</h1>
+		<h1>Relacion de articulos seleccionados</h1>
 		
 		<br>
-			 <h4 th:text="${proyecto.titulo}"></h4>
+			<h4>Pregunta:</h4>
+			<h4 th:text="${pregunta.cuestion}"> </h4>
 		<br>
 		<div class="row">
 			<div class="col-lg-3">
-				<a th:href="@{/proyectos/preguntas/nuevo/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-dark">Agregar
-					pregunta</a>
+				<a th:href="@{/proyectos/preguntas/revision/nuevo/{pregunta_id}(pregunta_id=${pregunta.id})}" class="btn btn-dark">Agregar
+					Revision</a>
 			</div>
 		</div>
 		<br>
@@ -68,18 +69,20 @@
 			style="width: 100%">
 			<thead class="table-dark">
 				<tr>
-					<th>Pregunta</th>
+					<th>Titulo</th>
+					<th>Autores</th>
 					<th>Acciones</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="pregunta : ${listPreguntas}">
+				<tr th:each="revision : ${listRevisiones}">
 
-					<td th:text="${pregunta.cuestion}"></td>
-					<td><a th:href="@{/proyectos/preguntas/ver/{id}(id=${pregunta.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
-					 	<a th:href="@{/proyectos/preguntas/editar/{id}(id=${pregunta.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/preguntas/revision/{pregunta_id}(pregunta_id=${pregunta.id})}"  class="btn btn-secondary">Articulos</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/pregunta/delete{id}(id=${pregunta.id})}" class="btn btn-danger">Eliminar</a></td>
+					<td th:text="${revision.articulo.titulo}"></td>
+					<td th:text="${revision.articulo.autores}"></td>
+					
+					<td><a  th:href="@{/proyectos/preguntas/revision/ver/{id}(id=${revision.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
+					 	<a th:href="@{/proyectos/preguntas/revision/editar/{id}(id=${revision.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
+						<a th:href="@{/proyectos/preguntas/revision/delete/{id}(id=${revision.id})}" class="btn btn-danger">Eliminar</a></td>
 						
 				</tr>
 			</tbody>
