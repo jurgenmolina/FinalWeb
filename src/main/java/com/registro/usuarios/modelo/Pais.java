@@ -74,6 +74,12 @@ public class Pais {
 	public Pais() {
 		super();
 	}
+
+
+	@Override
+	public String toString() {
+		return  nombre ;
+	}
 	
 	
 	

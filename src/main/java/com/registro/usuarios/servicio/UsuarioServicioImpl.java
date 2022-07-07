@@ -1,6 +1,7 @@
 package com.registro.usuarios.servicio;
 
 import java.util.Arrays;
+import org.springframework.core.io.Resource;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,6 +19,22 @@ import com.registro.usuarios.controlador.dto.UsuarioRegistroDTO;
 import com.registro.usuarios.modelo.Rol;
 import com.registro.usuarios.modelo.Usuario;
 import com.registro.usuarios.repositorio.UsuarioRepositorio;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
+import org.springframework.util.FileSystemUtils;
+import org.springframework.web.multipart.MultipartFile;
+
 
 @Service
 public class UsuarioServicioImpl implements UsuarioServicio {
@@ -64,4 +81,5 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 		// TODO Auto-generated method stub
 		return usuarioRepositorio.findByEmail(email);
 	}
+	
 }
