@@ -5,6 +5,8 @@ APLICACION WEB DESARROLADA CON SPRING BOOT - BOOTSTRAP - THYMELEAF
 Esta aplicación web permite el ingreso de proyectos y articulos, asignando preguntas a los proyectos relacionando los articulos y validando sus fuentes.
 Con el ánimo de apoyar el trabajo de los investigadores, se hace necesario desarrollar una solución que permita realizar el registro de las revisiones que se realizan para los proyectos de investigación.
 
+Adicional LOGIN + REGISTRO DE USUARIOS + ROLES + CIFRADO DE CONTRASEÑAS Y SEGURITY SPRING BOOT
+
 Comenzando 🚀
 Estas instrucciones te permitirán obtener una copia del proyecto en funcionamiento en tu máquina local para propósitos de desarrollo y pruebas.
 
