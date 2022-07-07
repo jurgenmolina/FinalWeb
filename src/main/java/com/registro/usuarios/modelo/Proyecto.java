@@ -2,7 +2,10 @@ package com.registro.usuarios.modelo;
 
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.websocket.Decoder.Text;
 
@@ -25,8 +29,8 @@ public class Proyecto {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "usuario_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
 	
 	@Column(name = "titulo",nullable = false,length = 100)
@@ -47,9 +51,12 @@ public class Proyecto {
 	@Column(name = "fechacreacion")
 	private String fechacreacion;
 	
-	@ManyToOne
-	@JoinColumn(name = "estado_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "estado_id", nullable = false)
 	private Estado estado;
+	
+	@OneToMany(mappedBy = "proyecto", cascade = CascadeType.ALL)
+	private Set<Pregunta> preguntas = new HashSet<>();
 
 	
 
@@ -79,6 +86,23 @@ public class Proyecto {
 		this.fechaFin = fechaFin;
 		this.estado = estado;
 	}
+
+	
+	
+
+	public Set<Pregunta> getPreguntas() {
+		return preguntas;
+	}
+
+
+
+	public void setPreguntas(Set<Pregunta> preguntas) {
+		this.preguntas = preguntas;
+		for (Pregunta pregunta : preguntas) {
+			pregunta.setProyecto(this);
+		}
+	}
+
 
 
 	public String getFechacreacion() {

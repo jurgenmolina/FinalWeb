@@ -2,6 +2,7 @@ package com.registro.usuarios.modelo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,12 +18,12 @@ public class Revision {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
-	@JoinColumn(name = "pregunta_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "pregunta_id",nullable = false)
 	private Pregunta pregunta;
 	
-	@ManyToOne
-	@JoinColumn(name = "articulo_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "articulo_id",nullable = false)
 	private Articulo articulo;
 	
 	@Column(name = "aporte",length = 500)
@@ -106,6 +107,8 @@ public class Revision {
 		this.razonexclusion = razonexclusion;
 	}
 
+	
+	
 	public Revision(int id, Pregunta pregunta, Articulo articulo, String aporte, String fechacreacion, String notas,
 			String estado, String razonexclusion) {
 		super();

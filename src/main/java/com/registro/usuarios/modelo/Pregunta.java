@@ -1,12 +1,18 @@
 package com.registro.usuarios.modelo;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,7 +24,7 @@ public class Pregunta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "proyecto_id",nullable = false)
 	private Proyecto proyecto;
 	
@@ -30,6 +36,9 @@ public class Pregunta {
 
 	@Column(name = "notas",nullable = false, length = 255)
 	private String notas;
+	
+	@OneToMany(mappedBy = "pregunta", cascade = CascadeType.ALL)
+	private Set<Revision> revisions = new HashSet<>();
 
 	public Pregunta(int id, Proyecto proyecto, String cuestion, String cadena, String notas) {
 		super();
@@ -46,6 +55,19 @@ public class Pregunta {
 		this.cuestion = cuestion;
 		this.cadena = cadena;
 		this.notas = notas;
+	}
+	
+	
+
+	public Set<Revision> getRevisions() {
+		return revisions;
+	}
+
+	public void setRevisions(Set<Revision> revisions) {
+		this.revisions = revisions;
+		for (Revision revision : revisions) {
+			revision.setPregunta(this);
+		}
 	}
 
 	public Pregunta() {

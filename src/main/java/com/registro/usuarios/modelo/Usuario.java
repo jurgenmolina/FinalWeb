@@ -1,6 +1,9 @@
 package com.registro.usuarios.modelo;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
@@ -41,6 +45,12 @@ public class Usuario {
 	@Column(name = "titulo",nullable = false,length = 1)
 	private String estado;
 	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<Articulo> articulos = new HashSet<>();
+	
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Set<Proyecto> proyectos = new HashSet<>();
+	
 	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
 	@JoinTable(
 			name = "usuarios_roles",
@@ -48,6 +58,32 @@ public class Usuario {
 			inverseJoinColumns = @JoinColumn(name = "rol_id",referencedColumnName = "id")
 			)
 	private Collection<Rol> roles;
+	
+	
+
+	public Set<Articulo> getArticulos() {
+		return articulos;
+	}
+
+	public void setArticulos(Set<Articulo> articulos) {
+		this.articulos = articulos;
+		for (Articulo articulo : articulos) {
+			articulo.setUsuario(this);
+		}
+	}
+	
+	
+
+	public Set<Proyecto> getProyectos() {
+		return proyectos;
+	}
+
+	public void setProyectos(Set<Proyecto> proyectos) {
+		this.proyectos = proyectos;
+		for (Proyecto proyecto : proyectos) {
+			proyecto.setUsuario(this);
+		}
+	}
 
 	public Long getId() {
 		return id;

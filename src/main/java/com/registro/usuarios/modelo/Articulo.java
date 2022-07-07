@@ -2,18 +2,27 @@ package com.registro.usuarios.modelo;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 @Entity
 @Table(name = "articulo")
@@ -23,8 +32,8 @@ public class Articulo {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@ManyToOne
-	@JoinColumn(name = "usuario_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
 	
 	@Column(name = "titulo",length = 500)
@@ -39,8 +48,8 @@ public class Articulo {
 	@Column(name = "citacion",length = 500)
 	private String citacion;
 	
-	@ManyToOne
-	@JoinColumn(name = "pais_id")
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "pais_id",nullable = false)
 	private Pais pais;
 	
 	@Column(name = "resumen",length = 500)
@@ -69,6 +78,9 @@ public class Articulo {
 	
 	@Column(name = "palabras_clave",length = 200)
 	private String palabras_clave;
+	
+	@OneToMany(mappedBy = "articulo", cascade = CascadeType.ALL)
+	private Set<Revision> revisions = new HashSet<>();
 
 	public Articulo() {
 		super();
@@ -114,6 +126,19 @@ public class Articulo {
 		this.revista = revista;
 		this.palabras_clave = palabras_clave;
 	}	
+	
+	
+
+	public Set<Revision> getRevisions() {
+		return revisions;
+	}
+
+	public void setRevisions(Set<Revision> revisions) {
+		this.revisions = revisions;
+		for (Revision revision : revisions) {
+			revision.setArticulo(this);
+		}
+	}
 
 	public String getCategoria() {
 		return categoria;
