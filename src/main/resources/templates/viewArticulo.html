@@ -37,7 +37,9 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	<div class="container">
 		
 			<div class="col-lg-3">
-				<a th:href="@{/articulos}" class="btn btn-dark">Volver</a>
+				<a th:href="@{/articulos}" class="btn ">
+				<img th:src="@{../../img/flechaImg.png}" height ="50" width="50" >
+				Volver</a>
 			</div>
 		<br>
 		<h1>Titulo:</h1>
@@ -47,33 +49,75 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	
 	<div class="container">
        <div class="row">
-          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
+          <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">            
               <div class="card-body">
-                 	<div class="card border-dark mb-3" style="max-width: 18rem;">
-					  <div class="card-header"></div>
-					  <div class="card-body text-dark">
-					    <h5 class="card-title">Año:</h5>
-					    <p class="card-text" th:text="${articulo.anio}"></p>
-					    <br>
-					    <h5 class="card-title">Autotores:</h5>
-					    <p class="card-text" th:text="${articulo.autores}"></p>
-					    <br>
-					    <h5 class="card-title">Citacion:</h5>
-					    <p class="card-text" th:text="${articulo.citacion}"></p>
-					    <br>
-					    <h5 class="card-title">Pais:</h5>
-					    <p class="card-text" th:text="${articulo.pais}"></p>
-					    <br>
-					    <h5 class="card-title">Estado:</h5>
-					    <p class="card-text" th:text="${articulo.categoria}"></p>
-					    <br>
-					    <h5 class="card-title">Conclusiones:</h5>
-					    <p class="card-text" th:text="${articulo.conclusiones}"></p>
-					    <br>
-					    <h5 class="card-title">Fecha de creacion:</h5>
-					    <p class="card-text" th:text="${articulo.fecha_creacion}"></p>
-					  </div>
+                 <form class="row g-3" th:action="@{/articulos/{id}(id=${articulo.id})}" th:object="${articulo}" method="POST">                                      
+                    
+                    <div class="col-md-12">
+                       <label>Autores : </label>
+                       <input type="text" name="autores" th:field="*{autores}" class="form-control" readonly>
+                    </div>
+                    
+                    <div class="col-md-12">
+                       <label>Citacion :</label>
+                       <input type="text" name="citacion" th:field="*{citacion}" class="form-control" placeholder="" readonly>
+                    </div>
+                    <div class="col-md-4">
+						<label>Pais : </label>
+						<input type="text" th:field="${articulo.pais.nombre}"  class="form-control" placeholder="" readonly>
 					</div>
+					<div class="col-md-2">
+                       <label>Año : </label>
+                       <input name="anio" th:field="*{anio}" class="form-control" placeholder="" readonly></input>
+                    </div>
+                    
+                    <div class="col-md-6">
+                       <label>Palabaras Clave : </label>
+                       <input type="text" name="palabras_clave" th:field="*{palabras_clave}" class="form-control" placeholder=" " readonly>
+                    </div>
+                                        
+                    <div class="col-md-12">
+                       <label>Resumen : </label>
+                       <textarea type="text" name="resumen" th:field="*{resumen}" class="form-control"  readonly ></textarea>
+                    </div>
+                    
+                     <div class="col-md-12">
+                       <label>Conclusiones : </label>
+                       <textarea type="text" name="conclusiones" th:field="*{conclusiones}" class="form-control" readonly ></textarea>
+                    </div>
+                    
+                    <div class="col-md-12">
+                       <label>Vacio : </label>
+                       <input type="text" name="vacio" th:field="*{vacio}" class="form-control" placeholder=" " readonly>
+                    </div>
+                    
+                    <div class="col-md-12">
+                       <label>Url : </label>
+                       <input type="text" name="url" th:field="*{url}" class="form-control" readonly  >
+                    </div>
+                    
+                    <div class="col-md-12">
+                       <label>Notas : </label>
+                       <textarea type="text" name="notas" th:field="*{notas}" class="form-control" readonly ></textarea>
+                    </div>
+                    
+                     <div class="col-md-12">
+                       <label>Revista : </label>
+                       <input type="text" name="revista" th:field="*{revista}" class="form-control" readonly  >
+                    </div>
+                    
+                     <div class="col-md-12">
+                       <label>Categoria : </label>
+                       <input type="text" name="categoria" th:field="*{categoria}" class="form-control" readonly >
+                    </div>
+                    
+
+                   <br>
+                   <div class="col-md-12">
+<!--                        <label>Usuario : </label> -->
+                       <input type="hidden" name="usuario" th:field="*{usuario.id}" class="form-control" readonly >
+                    </div>
+                 </form>
               </div>
           </div>
        </div>

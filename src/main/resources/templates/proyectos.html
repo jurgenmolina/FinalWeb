@@ -49,14 +49,16 @@
 
 	<div class="container">
 		<div class="col-lg-3">
-				<a th:href="@{/}" class="btn btn-dark">Volver</a>
+				<a th:href="@{/}" class="btn ">
+				<img th:src="@{../img/flechaImg.png}" height ="50" width="50" >
+				Volver</a>
 		</div>
 		<br>
 		<h1>Relacion de proyectos</h1>
 		
 		<br>
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col align-self-end">
 					<a th:href="@{/proyectos/nuevo}" class="btn btn-dark">Agregar
 					proyecto</a>
 					<br>
@@ -72,23 +74,46 @@
 				<tr>
 					<th>Titulo</th>
 					<th>Fecha</th>
-					<th>Acciones</th>
+					<th>Ver</th>
+					<th>Editar</th>
+					<th>Preguntas</th>
+					<th>Eliminar</th>
 				</tr>
 			</thead>
-			<tbody>
+		
 				<tr th:each="proyecto : ${listProyectos}">
 
 					<td th:text="${proyecto.titulo}"></td>
 					<td th:text="${proyecto.fechaInicio}"></td>
-					<td><a th:href="@{/proyectos/ver/{id}(id=${proyecto.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp
-					 	<a th:href="@{/proyectos/editar/{id}(id=${proyecto.id})}" class="btn btn-info">Editar</a>&nbsp&nbsp&nbsp
-						<a th:href="@{/proyectos/preguntas/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-secondary">preguntas</a>&nbsp&nbsp&nbsp
-						
-						<a th:href="@{/proyectos/{id}(id=${proyecto.id})}" class="btn btn-danger">Eliminar</a></td>
+					<td><a th:href="@{/proyectos/ver/{id}(id=${proyecto.id})}" class="btn btn-warning">Ver</a></td>
+					 	<td> <a th:href="@{/proyectos/editar/{id}(id=${proyecto.id})}" class="btn btn-info">Editar</a></td>
+						<td> <a th:href="@{/proyectos/preguntas/{proyecto_id}(proyecto_id=${proyecto.id})}" class="btn btn-secondary">preguntas</a> </td>						
+						<td> <a th:href="@{/proyectos/delete/{id}(id=${proyecto.id})}" class="btn btn-danger deleteButton">Eliminar</a></td>
 				</tr>
-			</tbody>
+	
 		</table>
+<!-- 		<div class="modal modal-danger"  tabindex="-1" role="dialog" id="deletModal"> -->
+<!-- 			<div class="modal-dialog" > -->
+<!-- 				<div class="modal-content"> -->
+<!-- 					<div class="modal-header"> -->
+<!-- 						<h4 class="modal-tittle">Cuidado, confirmar eliminacion</h4> -->
+<!-- 						<button type="button" class="close" data-dismiss="modal"> -->
+<!-- 							<span aria-hiden="true">&times;</span> -->
+<!-- 						</button >   -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-body"> -->
+<!-- 						 <p>Esta seguro de eliminar el proyecto?</p> -->
+<!-- 					</div> -->
+<!-- 					<div class="modal-footer"> -->
+<!-- 						<a href="" type = "button" class="btn btn-danger"  id="delRef">Eliminar</a >  -->
+<!-- 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button >  						 -->
+<!-- 					</div> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
+		
+<!-- 		</div> -->
 	</div>
+	
 
 
 
@@ -97,27 +122,23 @@
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous">
+	
+	</script>
 
 	<script type="text/javascript">
  	$(document).ready(function() {
-	    $('#example').DataTable();
+	   $('#example').DataTable();
+	    
+// 	    $('.table .deleteButton').on('click', function (e) {
+// 	        e.preventDefault();
+// 	        var href = $(this).attr('href');
+// 	        $('#deletModal #"delRef"').attr('href',href);
+// 	        $('#deletModal').modal();
+// 	    });
 	} );
  </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
 

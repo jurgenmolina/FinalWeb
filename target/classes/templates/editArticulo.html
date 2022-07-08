@@ -43,84 +43,87 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	<div class="container">
        <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-              <h1 class="text-center">Edicion de Arti-culo</h1>
+              <h1 class="text-center">Edicion de Articulo</h1>
               <div class="card-body">
-                 <form  th:action="@{/articulos/{id}(id=${articulo.id})}" th:object="${articulo}" method="POST">
-                    <div class="form-group">
+                 <form  class="row g-3" th:action="@{/articulos/{id}(id=${articulo.id})}" th:object="${articulo}" method="POST">
+                    <div class="col-md-12">
                        <label>Titulo : </label>
                        <input type="text" name="titulo" th:field="*{titulo}" class="form-control" placeholder=" " required>
                     </div>
                     
-                    <div class="form-group">
-                       <label>Año : </label>
-                       <input name="anio" th:field="*{anio}" class="form-control" placeholder="" required></input>
-                    </div>
-                    
-                    <div class="form-group">
+                    <div class="col-md-12">
                        <label>Autores : </label>
                        <input type="text" name="autores" th:field="*{autores}" class="form-control" required>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-12">
                        <label>Citacion :</label>
                        <input type="text" name="citacion" th:field="*{citacion}" class="form-control" placeholder="" required>
                     </div>
-                    <div class="form-group">
-						<label class="col-form-label col-sm-4">Pais : </label>
-						<div class="col-sm-8">
-							<select th:field="*{pais}" class="form-control" required>
+                    <div class="col-md-4">
+<!-- 						<label class="col-form-label col-sm-4">Pais : </label> -->
+						<div >
+						<label for="floatingSelectGrid">Pais: </label>
+							<select th:field="*{pais}" class="form-select" required>
 								<th:block th:each="pais : ${paises}">
 									<option th:text="${pais.nombre}" th:value="${pais.id}"></option>
 								</th:block>
-							</select>
+							</select>														
 						</div>
-					</div>
+					</div>                                        
                     
-                    <div class="form-group">
+                    <div class="col-md-2">
+                       <label>Año : </label>
+                       <input  maxlength="4" name="anio" th:field="*{anio}" class="form-control" placeholder="" required></input>
+                    </div>
+                    
+                                        
+                    <div class="col-md-6">
+                       <label>Palabaras Clave : </label>
+                       <input type="text" name="palabras_clave" th:field="*{palabras_clave}" class="form-control" placeholder=" " required>
+                    </div>
+                           
+                    <div class="col-md-12">
                        <label>Resumen : </label>
                        <textarea type="text" name="resumen" th:field="*{resumen}" class="form-control"  ></textarea>
                     </div>
                     
-                     <div class="form-group">
+                     <div class="col-md-12">
                        <label>Conclusiones : </label>
                        <textarea type="text" name="conclusiones" th:field="*{conclusiones}" class="form-control"  ></textarea>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-12">
                        <label>Vacio : </label>
                        <input type="text" name="vacio" th:field="*{vacio}" class="form-control" placeholder=" " required>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-12">
                        <label>Url : </label>
                        <input type="text" name="url" th:field="*{url}" class="form-control" required  >
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-12">
                        <label>Notas : </label>
                        <textarea type="text" name="notas" th:field="*{notas}" class="form-control" required ></textarea>
                     </div>
                     
-                     <div class="form-group">
+                     <div class="col-md-12">
                        <label>Revista : </label>
                        <input type="text" name="revista" th:field="*{revista}" class="form-control" required  >
                     </div>
                     
-                     <div class="form-group">
+                     <div class="col-md-12">
                        <label>Categoria : </label>
                        <input type="text" name="categoria" th:field="*{categoria}" class="form-control" required >
                     </div>
-                    
-                    <div class="form-group">
-                       <label>Palabaras Clave : </label>
-                       <input type="text" name="palabras_clave" th:field="*{palabras_clave}" class="form-control" placeholder=" " required>
+   
+                   	<br>
+                   	
+                   <div class="col-md-12">
+<!--                        <label>Usuario : </label> -->
+                       <input type="hidden" name="usuario" th:field="*{usuario.id}" class="form-control" readonly >
                     </div>
-                   <br>
-                   <div class="form-group">
-                       <label>Usuario : </label>
-                       <input type="text" name="usuario" th:field="*{usuario.id}" class="form-control" readonly >
-                    </div>
-                    
                     <div class="box-footer">
                        <button class="btn btn-success">Actualizar</button>                       
                     </div>

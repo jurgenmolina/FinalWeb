@@ -40,7 +40,6 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 		</div>
 		<br>
 		<h1 >Relacion de articulos</h1>
-		<h4 th:text="${pregunta.id}"> </h4>
 		<br>
 	</div>
 	
@@ -66,7 +65,7 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 									<td th:text="${articulo.autores}"></td>
 
 									<td>
-									<a  th:href="@{/articulos/ver/{id}(id=${articulo.id})}" class="btn btn-warning">Ver</a>&nbsp&nbsp&nbsp 
+									<a th:href="@{/articulos/ver/{id}(id=${articulo.id})}" class= "btn btn-warning">Ver</a>&nbsp&nbsp&nbsp 
 									<a th:href="@{/proyectos/preguntas/revision/nuevo/{pregunta_id}/{articulo_id}(pregunta_id=${pregunta.id} , articulo_id=${articulo.id})}" class="btn btn-info">Agregar</a>
 
 								</tr>

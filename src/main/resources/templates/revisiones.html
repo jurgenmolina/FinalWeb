@@ -49,13 +49,16 @@
 
 	<div class="container">
 		<div class="col-lg-3">
-				<a th:href="@{'/proyectos/preguntas/' + ${pregunta.proyecto.id}}" class="btn btn-dark">Volver</a>
+				<a th:href="@{'/proyectos/preguntas/' + ${pregunta.proyecto.id}}" class="btn">	
+				<img th:src="@{../../../img/flechaImg.png}" height ="50" width="50" >
+				Volver</a>
 		</div>
 		<br>
-		<h1>Relacion de articulos seleccionados</h1>
-		
+		<div class="text-bg-dark p-3">
+		<h1 >Relacion de articulos seleccionados</h1>
+		</div>
 		<br>
-			<h4>Pregunta:</h4>
+			<h4> Pregunta:</h4>
 			<h4 th:text="${pregunta.cuestion}"> </h4>
 		<br>
 		<div class="row">

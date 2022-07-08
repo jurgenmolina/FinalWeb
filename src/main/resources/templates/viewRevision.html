@@ -37,7 +37,9 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	<div class="container">
 		
 			<div class="col-lg-3">
-				<a th:href="@{/proyectos}" class="btn btn-dark">Volver</a>
+				<a th:href="@{/proyectos}" class="btn ">
+				<img th:src="@{../img/flechaImg.png}" height ="50" width="50" >
+				Volver</a>
 			</div>
 		<br>
 		<h1>Aporte:</h1>
@@ -49,22 +51,25 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
        <div class="row">
           <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
               <div class="card-body">
-                 	<div class="card border-dark mb-3" style="max-width: 18rem;">
-					  <div class="card-header"></div>
-					  <div class="card-body text-dark">
-					 	 <h5 class="card-title">Fecha de creación</h5>
-					    <p class="card-text" th:text="${revision.fechacreacion}"></p>
-					    <br>
-					    <h5 class="card-title">Notas:</h5>
-					    <p class="card-text" th:text="${revision.notas}"></p>
-					   	<br>
-					    <h5 class="card-title">Estado:</h5>
-					    <p class="card-text" th:text="${revision.estado}"></p>
-					    <br>
-					    <h5 class="card-title">Razon de exclusion:</h5>
-					    <p class="card-text" th:text="${revision.razonexclusion}"></p>
-					  </div>
-					</div>
+  				<form th:action="@{/proyectos/preguntas/revision/}" th:object="${revision}" method="POST">
+						  <div class="col-md-12">
+							  <label>Fecha de creación</label>
+					    	<input type="text" th:field="*{fechacreacion}" class="form-control" placeholder=" "  readonly>							  
+						  </div>
+						  <div class="col-md-12">
+							  <label>Notas: </label>
+					    	<input type="text" th:field="*{notas}" class="form-control" placeholder=" " readonly>							  
+						  </div>
+						  <div class="col-md-12">
+							  <label>Estado:</label>
+					    	<input type="text" th:field="*{estado}" class="form-control" placeholder=" " readonly>							  
+						  </div>
+						  <div class="col-md-12">
+							  <label>Razon de exclusion: </label>
+					    	<input type="text" th:field="*{razonexclusion}" class="form-control" placeholder=" "  readonly>							  
+						  </div>
+			</form>
+			
               </div>
           </div>
        </div>

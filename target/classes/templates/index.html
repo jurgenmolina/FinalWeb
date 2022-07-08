@@ -45,40 +45,41 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	
 		<br>
 		<div class="row">
-		   <div class="col-lg-3">
-		   
-		   <img th:src="@{../img/logoufps.jpg}"
-		style="width: 400px; display: flex; flex: wrap; margin-left: auto; margin-right: auto; margin-top: 40px;">
-		   
-		   		<a th:href="@{/proyectos}"class="btn btn-dark"> <img th:src="@{../img/proyecto.png}"></a>
-		     	<a th:href="@{/articulos}" class="btn btn-dark"> <img th:src="@{../img/articulo.png}"></a>
-		   </div>
-		</div> <br> 
+		   <div class="row row-cols-auto">
+		   <div class="col-md-6"  >
+		     <a th:href="@{/proyectos}" class="btn "  > <img th:src="@{../img/proyectoImg.jpg}" height ="80" width="100" >
+		     Proyectos</a>
+		     </div>
+		     <div class="col-md-6"  >
+		      <a th:href="@{/articulos}" class="btn " > <img th:src="@{../img/articuloImh.png}" height ="80" width="100"  >
+		      Articulos</a>
+		      </div>
+		</div> <br>
 
-		<table class="table table-striped table-bordered">
-			<thead class="table-dark">
-				<tr>
-					<th>ID</th>
-					<th>Nombre</th>
-					<th>Email</th>
-					<th>Clave</th>
-					<th>Pais</th>
-					<th>Entidad</th>
-					<th>Estado</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="usuario : ${usuarios}">
-					<td th:text="${usuario.id}">ID</td>
-					<td th:text="${usuario.nombre}">ID</td>
-					<td th:text="${usuario.email}">ID</td>
-					<td th:text="${usuario.clave}">ID</td>
-					<td th:text="${usuario.pais}">ID</td>
-					<td th:text="${usuario.entidad}">ID</td>
-					<td th:text="${usuario.estado}">ID</td>
-				</tr>
-			</tbody>
-		</table>
+<!-- 		<table class="table table-striped table-bordered"> -->
+<!-- 			<thead class="table-dark"> -->
+<!-- 				<tr> -->
+<!-- 					<th>ID</th> -->
+<!-- 					<th>Nombre</th> -->
+<!-- 					<th>Email</th> -->
+<!-- 					<th>Clave</th> -->
+<!-- 					<th>Pais</th> -->
+<!-- 					<th>Entidad</th> -->
+<!-- 					<th>Estado</th> -->
+<!-- 				</tr> -->
+<!-- 			</thead> -->
+<!-- 			<tbody> -->
+<!-- 				<tr th:each="usuario : ${usuarios}"> -->
+<!-- 					<td th:text="${usuario.id}">ID</td> -->
+<!-- 					<td th:text="${usuario.nombre}">ID</td> -->
+<!-- 					<td th:text="${usuario.email}">ID</td> -->
+<!-- 					<td th:text="${usuario.clave}">ID</td> -->
+<!-- 					<td th:text="${usuario.pais}">ID</td> -->
+<!-- 					<td th:text="${usuario.entidad}">ID</td> -->
+<!-- 					<td th:text="${usuario.estado}">ID</td> -->
+<!-- 				</tr> -->
+<!-- 			</tbody> -->
+<!-- 		</table> -->
 			</div>
 
 <!-- JavaScript Bundle with Popper -->

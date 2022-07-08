@@ -37,7 +37,9 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
 	<div class="container">
 		
 			<div class="col-lg-3">
-				<a th:href="@{/proyectos}" class="btn btn-dark">Volver</a>
+				<a th:href="@{/proyectos}" class="btn ">
+				<img th:src="@{../img/flechaImg.png}" height ="50" width="50" >
+				Volver</a>
 			</div>
 		
 		<h1>Agregar un proyecto</h1>
@@ -50,45 +52,47 @@ integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmV
           <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
               <h1 class="text-center">Registro de usuarios</h1>
               <div class="card-body">
-                 <form th:action="@{/proyectos}" th:object="${proyecto}" method="POST">
-                    <div class="form-group">
+                 <form class="row g-3" th:action="@{/proyectos}" th:object="${proyecto}" method="POST">
+                    <div class="col-md-12">
                        <label>Titulo : </label>
                        <input type="text" name="titulo" th:field="*{titulo}" class="form-control" placeholder=" " required>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-4">
                        <label>Fecha de inicio : </label>
                        <input type="date" name="fechaInicio" id="fi" value="2018-07-22" th:field="*{fechaInicio}" class="form-control" required>
                     </div>
                     
-                    <div class="form-group">
+                    <div class="col-md-4">
                        <label>Fecha fin :</label>
                        <input type="date" name="fechaFin" id="fn" th:field="*{fechaFin}" class="form-control" placeholder="" required>
                     </div>
-                    
-                    <div class="form-group">
-                       <label>Notas : </label>
-                       <textarea name="notas" th:field="*{notas}" class="form-control" placeholder="" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                       <label>Objetivo : </label>
-                       <input type="text" name="objetivo" th:field="*{objetivo}" class="form-control" placeholder=" " required>
-                    </div>
-					<div class="form-group">
-						<label class="col-form-label col-sm-4">Estado : </label>
-						<div class="col-sm-8">
-							<select th:field="*{estado}" class="form-control" required>
+                    <div class="col-md-4">
+<!-- 						<label class="col-form-label col-sm-4">Estado:</label> -->
+						<div >
+						<label for="floatingSelectGrid">Estado: </label>
+							<select th:field="*{estado}"class="form-select" required>
 								<th:block th:each="estado : ${estados}">
 									<option th:text="${estado.descripcion}" th:value="${estado.id}"></option>
 								</th:block>
 							</select>
+							
 						</div>
 					</div>
+                    <div class="col-md-12">
+                       <label>Notas : </label>
+                       <textarea name="notas" th:field="*{notas}" class="form-control" placeholder="" required></textarea>
+                    </div>
+                    
+                    <div class="col-md-12">
+                       <label>Objetivo : </label>
+                       <input type="text" name="objetivo" th:field="*{objetivo}" class="form-control" placeholder=" " required>
+                    </div>
+					
 					<br>
 					<div class="form-group">
-                       <label>Usuario : </label>
-                       <input type="text" name="usuario" th:field="*{usuario.id}" class="form-control" readonly >
+<!--                        <label>Usuario : </label> -->
+                       <input type="hidden" name="usuario" th:field="*{usuario.id}" class="form-control" readonly >
                     </div>
                    <br>
                     <div class="box-footer">
